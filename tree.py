@@ -3,34 +3,31 @@ class Tree:
     self.root = root_node
 
   def find(self, key):
-    current_node = self.root
-    current_node_keys = current_node.keys
+    node = self._traverse_nodes(key, self.root)
+    return self._find_key_in_node(key, node)
 
-    while not current_node.is_leaf():
-      if key in current_node.keys:
-        return key
-      else:
-        if key < current_node_keys[0]:
-          if current_node.left_child != None:
-            current_node = current_node.left_child
-          else:
-            return None
-        elif key < current_node_keys[1]:
-          if current_node.left_middle_child != None:
-            current_node = current_node.left_middle_child
-          else:
-            return None
-        elif key < current_node_keys[2]:
-          if current_node.right_middle_child != None:
-            current_node = current_node.right_middle_child
-          else:
-            return None
-        else:
-          if current_node.right_child != None:
-            current_node = current_node.right_child
-          else:
-            return None
-    if key not in current_node.keys:
-      return None 
-    else:
+  def _find_key_in_node(self, key, node):
+    if key in node.keys:
       return key
+    else:
+      return None
+
+  def _traverse_nodes(self, key, node):
+    while not node.is_leaf():
+      if key < node.keys[0]:
+        if node.left_child != None:
+          node = node.left_child
+      elif key < node.keys[1]:
+        if node.left_middle_child != None:
+          node = node.left_middle_child
+      elif key < node.keys[2]:
+        if node.right_middle_child != None:
+          node = node.right_middle_child
+      else:
+        if node.right_child != None:
+          node = node.right_child
+
+      if key in node.keys:
+        break
+
+    return node

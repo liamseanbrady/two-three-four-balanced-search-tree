@@ -1,6 +1,6 @@
 import unittest
-from two_three_four_tree import Node
-from two_three_four_tree import Tree
+from node import Node
+from tree import Tree
 
 class BalancedSearchTreeTest(unittest.TestCase):
   def test_finds_key_in_the_tree_with_depth_one_and_one_key_root(self):

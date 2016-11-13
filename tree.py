@@ -6,6 +6,20 @@ class Tree:
     node = self._traverse_nodes(key, self.root)
     return self._find_key_in_node(key, node)
 
+  def restructure_three_key_node(self, node):
+    parent_node = node.parent
+    middle_key = node.keys.pop(1)
+
+    if middle_key > max(parent_node.keys):
+      parent_node.keys.append(middle_key)
+    elif middle_key < min(parent_node.keys):
+      parent_node.keys.insert(0, middle_key)
+    else:
+      parent_node.keys.insert(1, middle_key)
+    
+    parent_node.left_child = node.keys[0]
+    parent_node.left_middle_child = node.keys[1]
+
   def _find_key_in_node(self, key, node):
     if key in node.keys:
       return key

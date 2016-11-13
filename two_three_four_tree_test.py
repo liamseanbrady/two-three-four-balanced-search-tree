@@ -73,6 +73,16 @@ class BalancedSearchTreeTest(unittest.TestCase):
 
     self.assertEqual(result, None)
 
+  def test_restructuring_three_key_node(self):
+    root_node = Node([9, 16])
+    three_key_node = Node([5, 6, 7])
+    root_node.add_left_child(three_key_node)
+    tree = Tree(root_node)
+    tree.restructure_three_key_node(three_key_node)
 
+    self.assertEqual(root_node.keys, [6, 9, 16])
+    self.assertEqual(root_node.left_middle_child, 7)
+    self.assertEqual(root_node.left_child, 5)
+    
 if __name__ == '__main__':
   unittest.main()
